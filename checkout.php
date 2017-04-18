@@ -23,17 +23,45 @@ if(isset($_POST['place_order'])){
         $query = "INSERT INTO Order_main (userId) VALUES ('$uID')";
 
         if ($conn->query($query) === TRUE) {
-
+            $sql1 = "";
             $orderID=$conn->insert_id;
             foreach($_SESSION['shopping_cart'] as $keys => $values){
-                $sql1 .= "INSERT INTO Order_items (orderId, productId, quantity) VALUES ('".$orderID."', '".$values['item_id']."', '".$values['item_quantity']."');";
+                $sql1 .= "INSERT INTO Order_items (orderId, productCode, quantity) VALUES ('".$orderID."', '".$values['item_id']."', '".$values['item_quantity']."');";
             }
            // insert order items into database
-            $insertOrderItems = $conn->multi_query($sql1);
+            $insertOrderMain = $conn->multi_query($sql1);
+
+           
             
-            if ($insertOrderItems) {
-                echo "Done";
-            } else {echo "Error: " . $sql1 . "<br>" . $conn->error;
+            if ($insertOrderMain) {
+
+
+
+                  $db = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($db->connect_error) {
+                        die("Connection failed: " . $db->connect_error);
+                    }
+
+                    $sql2="";
+
+            foreach($_SESSION['shopping_cart'] as $keys1 => $values1){
+                $price=(float)substr($values1['item_price'], 1);
+                 $sql2 .= "INSERT INTO Product (productCode, productName,productPrice,productImg ) VALUES ('".$values1['item_id']."','".$values1['item_name']."','$price', '".$values1['item_img']."');";
+
+            }
+
+            $insertOrderItems = $db->multi_query($sql2);                       
+
+
+            $db->close();
+
+
+
+
+
+
+            } else {echo "Error: ". $conn->error;
             }
         } else {echo "Error: " . $query . "<br>" . $conn->error;}
 
