@@ -99,27 +99,7 @@ $conn->close();
   </head>
   <body>
   
-     <div class="header-area">
-        <div class="container">
-            <div class="row">
-               
-                <div class="col-md-8">
-                    <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
-                            <li> <a href="cart.php">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                </div>  
-            </div>
-        </div>
-    </div> <!-- End site branding area -->
-    
-    <div class="mainmenu-area">
+   <div class="mainmenu-area">
         <div class="container">
             <div class="row">
                 <div class="navbar-header">
@@ -134,8 +114,8 @@ $conn->close();
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="shop.php">Shop page</a></li>
-                        <li class="active"><a href="cart.php">Cart</a></li>
-                        <li><a href="checkout.php">Checkout</a></li>
+                        <li><a href="cart.php">Cart</a></li>
+                        <li class="active"><a href="checkout.php">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
@@ -144,30 +124,47 @@ $conn->close();
             </div>
         </div>
     </div> <!-- End mainmenu area -->
-    
-    <div class="product-big-title-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+     
     
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
-            <div class="row">           
+            <div class="row">   
+            <div id="order_review" class="col-md-4">
+                 <div class="woocommerce-info">Returning customer? <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Click here to login</a></div>
+
+                                    <table class="shop_table">
+                                        <thead>
+                                            <tr class="cart-subtotal">
+                                                <th>Cart Total</th>
+                                                <td><span class="amount">$<?php echo $_GET['total'];?></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="shipping">
+                                                <th>Shipping and Handling</th>
+                                                <td>
+
+                                                    Free Shipping
+                                                    <input type="hidden" class="shipping_method" value="free_shipping" id="shipping_method_0" data-index="0" name="shipping_method[0]">
+                                                </td>
+                                            </tr>
+
+
+                                            <tr class="order-total">
+                                                <th>Order Total</th>
+                                                <td><strong><span class="amount">$<?php echo $_GET['total'];?></span></strong> </td>
+                                            </tr>
+
+                                        </thead>
+                                        
+                                    </table>
+                                        <div class="clear"></div>
+
+                                </div>        
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <div class="woocommerce-info">Returning customer? <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Click here to login</a>
-                            </div>
-
                             <form id="login-form-wrap" class="login collapse" method="post">
 
 
@@ -218,31 +215,15 @@ $conn->close();
                                             </p>
 
                                             <p id="billing_first_name_field" class="form-row form-row-first validate-required">
-                                                <label class="" for="billing_first_name">First Name <abbr title="required" class="required">*</abbr>
+                                                <label class="" for="billing_first_name">Name <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <input type="text" value="" placeholder="" id="billing_first_name" name="billing_first_name" class="input-text ">
-                                            </p>
-
-                                            <p id="billing_last_name_field" class="form-row form-row-last validate-required">
-                                                <label class="" for="billing_last_name">Last Name <abbr title="required" class="required">*</abbr>
-                                                </label>
-                                                <input type="text" value="" placeholder="" id="billing_last_name" name="billing_last_name" class="input-text ">
-                                            </p>
-                                            <div class="clear"></div>
-
-                                            <p id="billing_company_field" class="form-row form-row-wide">
-                                                <label class="" for="billing_company">Company Name</label>
-                                                <input type="text" value="" placeholder="" id="billing_company" name="billing_company" class="input-text ">
                                             </p>
 
                                             <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
                                                 <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <input type="text" value="" placeholder="Street address" id="address" name="billing_address" class="input-text ">
-                                            </p>
-
-                                            <p id="billing_address_2_field" class="form-row form-row-wide address-field">
-                                                <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="billing_address_2" name="billing_address_2" class="input-text ">
                                             </p>
 
                                             <p id="billing_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
@@ -286,69 +267,27 @@ $conn->close();
                                                 </p>
                                                 <div class="clear"></div>
                                             </div>
-
-                                        </div>
-                                    </div>
-
-
-                                <div id="order_review">
-
-                                    <table class="shop_table">
-                                        <thead>
-                                            <tr>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-total">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    Ship Your Idea <strong class="product-quantity">× </strong> </td>
-                                                <td class="product-total">
-                                                    <span class="amount">£15.00</span> </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-
-                                            <tr class="cart-subtotal">
-                                                <th>Cart Subtotal</th>
-                                                <td><span class="amount">$<?php echo $_GET['total'];?></span>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="shipping">
-                                                <th>Shipping and Handling</th>
-                                                <td>
-
-                                                    Free Shipping
-                                                    <input type="hidden" class="shipping_method" value="free_shipping" id="shipping_method_0" data-index="0" name="shipping_method[0]">
-                                                </td>
-                                            </tr>
-
-
-                                            <tr class="order-total">
-                                                <th>Order Total</th>
-                                                <td><strong><span class="amount">$<?php echo $_GET['total'];?></span></strong> </td>
-                                            </tr>
-
-                                        </tfoot>
-                                    </table>
-                                        <div class="clear"></div>
-
-                                
-                                        <div class="form-row place-order">
+                                            <div class="form-row place-order">
 
                                             <input type="submit" data-value="Place order" value="Place order" id="place_order" name="place_order" class="button alt">
 
 
                                         </div>
+                                
 
-                                </div>
+                                        </div>
+                                    </div>
+
+
+                                        
                             </form>
 
                         </div>                       
                     </div>                    
                 </div>
+
+
+
             </div>
         </div>
     </div>

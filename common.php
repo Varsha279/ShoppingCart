@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+
+</body>
+</html>
+
 <?php
 session_start();
 $xml = simplexml_load_file('https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1', null, LIBXML_NOCDATA);
@@ -23,7 +34,11 @@ if(isset($_POST['add_to_cart'])){
                     'item_img'=>$_POST['hidden_img'],
                 );
                 $_SESSION['shopping_cart'][$count]=$item_array;
-                echo '<script>alert("Item_added!!!!")</script>';
+                echo '<div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Success! </strong>
+    Product have added to your Cart.
+</div>';
 
 
         }else{
@@ -32,6 +47,12 @@ if(isset($_POST['add_to_cart'])){
 					$_SESSION['shopping_cart'][$keys]['item_quantity'] += 1;
 					}	
 			}
+
+			 echo '<div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Success! </strong>
+    Product have added to your Cart.
+</div>';
         }
     }else{
         $item_array = array(

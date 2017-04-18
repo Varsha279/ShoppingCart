@@ -123,7 +123,9 @@ $item_total = 0;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php      
+
+                                    <?php    
+                                    if (isset($_SESSION['shopping_cart'])) {
                                         foreach ($_SESSION['shopping_cart'] as $keys=> $values){
                                     ?>
                                         <tr class="cart_item">
@@ -159,7 +161,9 @@ $item_total = 0;
                                                 <span class="amount">$<?php echo $total;?></span> 
                                             </td>
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }else{ echo "Your Cart Is Empty. Please "."<a href='shop.php'>Continue Shopping</a><br/>";}
+
+                                         ?>
                                         <tr>
                                             <td colspan="6" align="right">
                                                 <label>Total: $<?php echo $item_total;?></label>

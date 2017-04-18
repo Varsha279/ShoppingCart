@@ -1,3 +1,6 @@
+<?php
+require 'common.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,6 +24,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
   </head>
   <body>
    
@@ -90,7 +94,6 @@
                 
 <?php
 
-require 'common.php';
 
     foreach ($xml->channel->item as $item) {
     
@@ -258,6 +261,17 @@ require 'common.php';
    
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready (function(){
+           window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 900);
+ });
+
+    </script>
+
     
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
