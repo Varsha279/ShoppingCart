@@ -13,23 +13,32 @@ if ($conn->connect_error) {
 } 
 
 if(isset($_POST['place_order'])){
+
+
     $sql = "INSERT INTO User (userName, userEmail, userPhone,userAddress,userPassword)
             VALUES ('".$_POST["billing_first_name"]."','".$_POST["billing_email"]."','".$_POST["billing_phone"]."','".$_POST["billing_address"]."','".$_POST["account_password"]."')";
-if ($conn->query($sql) === TRUE) {
-
-    $result = $conn->query("select userId from User where userName = '".$_POST["billing_phone"]."'");
-    $row = $result->fetch_assoc();
-
-     $query = "INSERT INTO Order_main (userId) VALUES ('".$row["userId"]."')";
-
-    if ($conn->query($query) === TRUE) {
-            echo "Done";
-    }else{echo "Error: " . $sql . "<br>" . $conn->error;}
-
     
+    if ($conn->query($sql) === TRUE) {
+        $uID = $conn->insert_id;
+        $query = "INSERT INTO Order_main (userId) VALUES ('$uID')";
 
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+        if ($conn->query($query) === TRUE) {
+
+            $orderID=$conn->insert_id;
+            foreach($_SESSION['shopping_cart'] as $keys => $values){
+                $sql1 .= "INSERT INTO Order_items (orderId, productId, quantity) VALUES ('".$orderID."', '".$values['item_id']."', '".$values['item_quantity']."');";
+            }
+           // insert order items into database
+            $insertOrderItems = $conn->multi_query($sql1);
+            
+            if ($insertOrderItems) {
+                echo "Done";
+            } else {echo "Error: " . $sql1 . "<br>" . $conn->error;
+            }
+        } else {echo "Error: " . $query . "<br>" . $conn->error;}
+
+    } else {
+    echo "Error: " . $query . "<br>" . $conn->error;
 }
 }
 
