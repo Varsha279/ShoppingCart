@@ -107,7 +107,7 @@ require 'common.php';
 
                        <form method="post" action="shop.php?action=add" class="cart">
                         <input type="hidden" value="<?php echo $price; ?>" name="hidden_price">
-                        <input type="text" value="<?php echo $productId; ?>" name="hidden_pId" >
+                        <input type="hidden" value="<?php echo $productId; ?>" name="hidden_pId" >
                         <input type="hidden" value="<?php echo $name; ?>" name="hidden_name" >
                         <input type="hidden" value="<?php echo $img; ?>" name="hidden_img" >
                         <input type="hidden" value="1" name="hidden_quantity" >

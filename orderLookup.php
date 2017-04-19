@@ -1,6 +1,5 @@
 <?php
 
-                                    require 'common.php';
 
 /*if (!$conn->multi_query($sql1)) {
     echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
@@ -133,9 +132,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if(isset($_POST['show_details'])){ ?>
+if(isset($_POST['show_details'])){ 
+    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
 
-    <table cellspacing="0" class="shop_table cart">
+    $result = $conn->query($sql);
+    $sql1 = "";
+
+    while ($row = $result->fetch_assoc()) {
+         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
+} 
+                                    if (!$conn->multi_query($sql1)) {
+                                        echo "Sorry. No Order is found. Please try again with Correct orderID or Please Continue Shopping ";
+                                   }else{
+
+                                    echo "<div class='woocommerce-info'>Hello, ". $_POST["first_name"].". Your Order Details</div>";
+                                    ?>
+
+
+                                    <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
                                             <th class="product-thumbnail">&nbsp;</th>
@@ -146,20 +160,9 @@ if(isset($_POST['show_details'])){ ?>
                                     </thead>
                                     <tbody>
 
-<?php
-    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
 
-    $result = $conn->query($sql);
-    $sql1 = "";
 
-    while ($row = $result->fetch_assoc()) {
-         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
-} 
-                                    if (!$conn->multi_query($sql1)) {
-                                        echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
-                                   }
-
-                                            do {
+<?php                                            do {
                                                 if ($res = $conn->store_result()) {
                                                     $result = $res->fetch_all(MYSQLI_ASSOC);
                                                     //$res->free();
@@ -173,7 +176,8 @@ if(isset($_POST['show_details'])){ ?>
                                                 </td>
 
                                                 <td class="product-name">
-                                                    <a href="single-product.php?productId=<?php echo $values["productCode"]; ?>"><?php echo $values["productName"]; ?></a> 
+                                                    <!-- <a href="single-product.php?productId=<?php echo $values["productCode"]; ?>"></a>  -->
+                                                    <label><?php echo $values["productName"]; ?></label>
                                                 </td>
 
                                             <td class="product-quantity">
@@ -191,7 +195,7 @@ if(isset($_POST['show_details'])){ ?>
                                              <?php           }
                                                     }
                                             } while ($conn->more_results() && $conn->next_result());
-
+                                            }
 
                                                        
                                             }

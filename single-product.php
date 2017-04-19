@@ -1,29 +1,3 @@
-<?php 
-require 'common.php';
-$pId = $_GET['productId'];
-                
-    foreach ($xml->channel->item as $item) {
-
-        $content = $item->children('content', 'https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1');
-        $html_string = $content->encoded;                       
-        $dom->loadHTML($html_string);
-        $productId = $dom->getElementsByTagName('a')->item(0)->getAttribute('data-product-products');
-                        
-        if ($pId == $productId) {
-
-            $title=(string) $item->title;
-            $description = (string) $item->description;                     
-            $name = implode(' ', array_slice(explode(' ', $title), 0, 4));
-            $img =(string) $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
-            $add_description = $dom->getElementsByTagName('div');
-            $alt =(string) $dom->getElementsByTagName('img')->item(0)->getAttribute('alt');
-
-            if(preg_match($pattern, $description,$matches)){
-                $price=$matches[0];
-            }else{
-                $price= "Free";
-            } 
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,28 +25,7 @@ $pId = $_GET['productId'];
   <body>
    
   <body>
-   
-     <div class="header-area">
-        <div class="container">
-            <div class="row">
-               
-                <div class="col-md-8">
-                    <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
-                            <li> <a href="cart.php">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                </div>  
-            </div>
-        </div>
-    </div> <!-- End site branding area -->
-    
-    <div class="mainmenu-area">
+   <div class="mainmenu-area">
         <div class="container">
             <div class="row">
                 <div class="navbar-header">
@@ -85,14 +38,9 @@ $pId = $_GET['productId'];
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.php">Shop page</a></li>
-                        <li class="active"><a href="single-product.php">Single product</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="shop.php">Products & Deals</a></li>
                         <li><a href="cart.php">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>  
             </div>
@@ -104,12 +52,41 @@ $pId = $_GET['productId'];
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>Caliva Store</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+<?php 
+require 'common.php';
+$pId = $_GET['productId'];
+$count=0;
+                
+    foreach ($xml->channel->item as $item) {
+
+        $content = $item->children('content', 'https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1');
+        $html_string = $content->encoded;                       
+        $dom->loadHTML($html_string);
+        $productId = $dom->getElementsByTagName('a')->item(0)->getAttribute('data-product-products');
+                        
+        if ($pId == $productId) {
+
+
+            $title=(string) $item->title;
+            $description = (string) $item->description;                     
+            $name = implode(' ', array_slice(explode(' ', $title), 0, 4));
+            $img =(string) $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
+            $add_description = $dom->getElementsByTagName('div');
+            $alt =(string) $dom->getElementsByTagName('img')->item(0)->getAttribute('alt');
+
+            if(preg_match($pattern, $description,$matches)){
+                $price=$matches[0];
+            }else{
+                $price= "Free";
+            } 
+?>
     
     
     <div class="single-product-area">
@@ -124,7 +101,7 @@ $pId = $_GET['productId'];
                         </div>
                         
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="product-images">
                                     <div class="product-main-img">
                                         <img src="<?php echo $img;?>" alt="">
@@ -133,7 +110,7 @@ $pId = $_GET['productId'];
                                 </div>
                             </div>
                             
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <div class="product-inner">
                                     <h2 class="product-name"><?php echo $title;?></h2>
                                     <div class="product-inner-price">
@@ -145,7 +122,7 @@ $pId = $_GET['productId'];
                                             
                                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="hidden_quantity" min="1" step="1">
                                             <input type="hidden" value="<?php echo $price; ?>" name="hidden_price">
-                                            <input type="text" value="<?php echo $productId; ?>" name="hidden_pId" >
+                                            <input type="hidden" value="<?php echo $productId; ?>" name="hidden_pId" >
                                             <input type="hidden" value="<?php echo $name; ?>" name="hidden_name" >  
                                             <input type="hidden" value="<?php echo $img; ?>" name="hidden_img" >
                                         </div>
@@ -194,7 +171,11 @@ $pId = $_GET['productId'];
                         
                     </div>                    
                 </div>
-                <?php } } ?>
+                <?php }
+
+                }
+
+                ?>
             </div>
         </div>
     </div>
