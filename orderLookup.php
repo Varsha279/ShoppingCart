@@ -1,23 +1,45 @@
 <?php
 require 'common.php';
-require_once("dbcontroller.php");
-$db_handle = new DBController();
-$item_total = 0;
-    if(isset($_GET['action'])){
-        if($_GET['action']=='delete'){
-            foreach ($_SESSION['shopping_cart'] as $keys => $values) {
-                
-                if($values['item_id']==$_GET['id']){
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shoppingcart";
 
-                    unset($_SESSION['shopping_cart'][$keys]);
-                    echo '<script>alert("Item Remove !!")</script';
-                    echo '<script>window.location="cart.php"</script>';
-                }
-            }
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if(isset($_POST['show_details'])){
+    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
+
+    $result = $conn->query($sql);
+    $sql1 = "";
+
+    while ($row = $result->fetch_assoc()) {
+         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
+}
+
+if (!$conn->multi_query($sql1)) {
+    echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
+}
+
+do {
+    if ($res = $conn->store_result()) {
+        $res->fetch_all(MYSQLI_ASSOC);
+
         }
-    }         
-?>
+} while ($conn->more_results() && $conn->next_result());
 
+print_r($sql1);
+
+           
+}
+$conn->close();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,9 +63,10 @@ $item_total = 0;
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-  </head>   
+  </head>
   <body>
-  <div class="mainmenu-area">
+   
+     <div class="mainmenu-area">
         <div class="container">
             <div class="row">
                 <div class="navbar-header">
@@ -58,8 +81,8 @@ $item_total = 0;
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="shop.php">Products & Deals</a></li>
-                        <li class="active"><a href="cart.php">Cart</a></li>
-                        <li><a href="orderLookup.php">Order-Lookup</a></li>
+                        <li><a href="cart.php">Cart</a></li>
+                        <li class="active"><a href="orderLookup.php">Order-Lookup</a></li>
                     </ul>
                 </div>  
             </div>
@@ -76,103 +99,74 @@ $item_total = 0;
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div><!-- End mainmenu area -->   
     
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
-            <div class="row">           
-                <div class="col-md-12">
-                    <div class="product-content-right">
+            <div class="row">   
+            <div id="order_review" class="col-md-4">
+                 <div class="woocommerce-info">Want to LookUp what you just ordered?</div>
+
+                                    <form enctype="multipart/form-data" action="orderLookup.php" class="order" method="post" id="order" name="order">
+
+                                        <p id="first_name_field" class="form-row form-row-first validate-required">
+                                                <label for="first_name">*Enter Name : &nbsp;&nbsp;&nbsp;</label>
+                                                <input type="text" value="" placeholder="" id="first_name" name="first_name" class="input-text" required>
+                                        </p>
+                                         <p id="email_field" class="form-row form-row-first validate-required">
+                                                <label for="email">*Enter Email : &nbsp;&nbsp;&nbsp;</label>
+                                                <input type="text" value="" placeholder="" id="email" name="email" class="input-text" required>
+                                        </p>
+                                        <p id="orderId_field" class="form-row form-row-first validate-required">
+                                                <label for="orderId">*Enter OrderID : </label>
+                                                <input type="text" value="" placeholder="" id="orderId" name="orderId" class="input-text" required>
+                                        </p>
+                                        <div class="form-row place-order">
+                                            <input type="submit" value="Show Details" id="show_details" name="show_details" class="button alt">
+                                        </div>
+
+                                    </form>
+                <div class="clear"></div>
+                </div>        
+                <div class="col-md-8">
+                    <div class="">
                         <div class="woocommerce">
-                        <?php if (isset($_SESSION['shopping_cart'])) {?>
-                            <form method="post" action="#">
-                                <table cellspacing="0" class="shop_table cart">
-                                    <thead>
-                                        <tr>
-                                            <th class="product-remove">&nbsp;</th>
-                                            <th class="product-thumbnail">&nbsp;</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-subtotal">Sub-total</th>
-                                        </tr>
-                                    </thead>
+                             <div class="cart_totals ">
+                                <h2>Cart Totals</h2>
+
+                                <table cellspacing="0">
                                     <tbody>
-
-                                    <?php    
-                                    
-                                        foreach ($_SESSION['shopping_cart'] as $keys=> $values){
-                                    ?>
-                                        <tr class="cart_item">
-                                            <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="cart.php?action=delete&id=<?php echo $values["item_id"] ?>">×</a> 
-                                            </td>
-
-                                            <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="<?php echo $values['item_img'];?>"></a>
-                                            </td>
-
-                                            <td class="product-name">
-                                                <a href="single-product.php?productId=<?php echo $values["item_id"]; ?>"><?php echo $values["item_name"]; ?></a> 
-                                            </td>
-
-                                            <td class="product-quantity">
-                                                <div class="quantity buttons_added">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="<?php echo $values['item_quantity']; ?>" min="0" step="1">
-                                                </div>
-                                            </td>
-
-                                            <td class="product-price">
-                                                <span class="amount"><?php echo $values['item_price']; ?></span> 
-                                            </td>
-
-                                            <?php
-                                                $price=(float)substr($values['item_price'], 1);
-                                                $total = number_format($price*$values["item_quantity"],2);
-                                                $item_total += $total;
-                                             ?>
-
-                                            <td class="product-subtotal">
-                                                <span class="amount">$<?php echo $total;?></span> 
-                                            </td>
-                                        </tr>
-                                        <?php } 
-
-                                         ?>
-                                        <tr>
-                                            <td colspan="6" align="right">
-                                                <label>Total: $<?php echo $item_total;?></label>
-                                            </td>
+                                        <tr class="cart-subtotal">
+                                            <th>Cart Subtotal</th>
+                                            <td><span class="amount"></span></td>
                                         </tr>
 
-                                        <tr>
-                                            <td colspan="6">
-                                                <a href="checkout.php?total=<?php echo $item_total?>">Place Order</a>
-                                            </td>
+                                        <tr class="shipping">
+                                            <th>Shipping and Handling</th>
+                                            <td>Free Shipping</td>
                                         </tr>
-                            <?php }else{ echo "Your Cart Is Empty. Please "."<a href='shop.php'>Continue Shopping</a><br/>";}?>
+
+                                        <tr class="order-total">
+                                            <th>Order Total</th>
+                                            <td><strong><span class="amount"></span></strong> </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                            
-                            </form>
-
-                            <div class="cart-collaterals">
-
-
-                           
-
                             </div>
-                        </div>                        
+
+                        </div>                       
                     </div>                    
                 </div>
+
+
+
             </div>
         </div>
     </div>
 
 
-     <div class="footer-top-area">
+    <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -242,7 +236,7 @@ $item_total = 0;
             </div>
         </div>
     </div>
-   <!-- Latest jQuery form server -->
+    <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
     
     <!-- Bootstrap JS form CDN -->

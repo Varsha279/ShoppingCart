@@ -114,19 +114,16 @@ $conn->close();
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.php">Shop page</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="shop.php">Products & Deals</a></li>
                         <li><a href="cart.php">Cart</a></li>
                         <li class="active"><a href="checkout.php">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="orderLookup.php">Order-Lookup</a></li>
                     </ul>
                 </div>  
             </div>
         </div>
-    </div> <!-- End mainmenu area -->
-     
+    </div> <!-- End mainmenu area -->   
     
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>

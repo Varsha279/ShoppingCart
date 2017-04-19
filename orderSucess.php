@@ -44,40 +44,37 @@ if (isset($_SESSION['shopping_cart'])) {
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.php">Shop page</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="shop.php">Products & Deals</a></li>
                         <li><a href="cart.php">Cart</a></li>
-                        <li class="active"><a href="checkout.php">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>  
             </div>
         </div>
     </div> <!-- End mainmenu area -->
-
+    
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>Caliva Store</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
      
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                    Thank you for shopping with us. <br/> A confirmation has been sent to your email <br/>
+            <div class="col-md-12 col-md-12">
+                    <br/><br/><br/><br/><br/><br/>Thank you for shopping with us. <br/> A confirmation has been sent to your email <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
             
         </div>
     </div>
-
 
      <div class="footer-top-area">
         <div class="zigzag-bottom"></div>

@@ -26,28 +26,7 @@ require 'common.php';
     <link rel="stylesheet" href="css/responsive.css">
     
   </head>
-  <body>
-   
-    <div class="header-area">
-        <div class="container">
-            <div class="row">
-               
-                <div class="col-md-8">
-                    <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
-                            <li> <a href="cart.html">Cart - <span class="cart-amunt"></span> <i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                </div>  
-            </div>
-        </div>
-    </div> <!-- End site branding area -->
-    
+  <body>   
     <div class="mainmenu-area">
         <div class="container">
             <div class="row">
@@ -61,13 +40,10 @@ require 'common.php';
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="shop.php">Shop page</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li class="active"><a href="shop.php">Products & Deals</a></li>
                         <li><a href="cart.php">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="orderLookup.php">Order-Lookup</a></li>
                     </ul>
                 </div>  
             </div>
@@ -79,7 +55,7 @@ require 'common.php';
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>Caliva Store</h2>
                     </div>
                 </div>
             </div>
