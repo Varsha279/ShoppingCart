@@ -1,43 +1,26 @@
 <?php
-require 'common.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "shoppingcart";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+                                    require 'common.php';
 
-if(isset($_POST['show_details'])){
-    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
-
-    $result = $conn->query($sql);
-    $sql1 = "";
-
-    while ($row = $result->fetch_assoc()) {
-         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
-}
-
-if (!$conn->multi_query($sql1)) {
+/*if (!$conn->multi_query($sql1)) {
     echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
 }
 
 do {
     if ($res = $conn->store_result()) {
-        $res->fetch_all(MYSQLI_ASSOC);
-
+        $result = $res->fetch_all(MYSQLI_ASSOC);
+        //$res->free();
+            foreach ($result as $key => $value) {
+                echo $value['productCode'];
+                # code...
+            }
         }
 } while ($conn->more_results() && $conn->next_result());
 
-print_r($sql1);
 
            
 }
-$conn->close();
+$conn->close();*/
 
 ?>
 <!DOCTYPE html>
@@ -128,36 +111,98 @@ $conn->close();
 
                                     </form>
                 <div class="clear"></div>
-                </div>        
+                </div>      
+
+        <div class="container">
+            <div class="row">           
                 <div class="col-md-8">
-                    <div class="">
+                    <div class="product-content-right">
                         <div class="woocommerce">
-                             <div class="cart_totals ">
-                                <h2>Cart Totals</h2>
+                                
 
-                                <table cellspacing="0">
+<?php   
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shoppingcart";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if(isset($_POST['show_details'])){ ?>
+
+    <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-price">Price</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount"></span></td>
-                                        </tr>
 
-                                        <tr class="shipping">
-                                            <th>Shipping and Handling</th>
-                                            <td>Free Shipping</td>
-                                        </tr>
+<?php
+    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
 
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount"></span></strong> </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+    $result = $conn->query($sql);
+    $sql1 = "";
+
+    while ($row = $result->fetch_assoc()) {
+         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
+} 
+                                    if (!$conn->multi_query($sql1)) {
+                                        echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
+                                   }
+
+                                            do {
+                                                if ($res = $conn->store_result()) {
+                                                    $result = $res->fetch_all(MYSQLI_ASSOC);
+                                                    //$res->free();
+                                                foreach ($result as $keys => $values) { 
+                                                    ?>
+
+                                                        
+                                                <tr class="cart_item">
+                                                 <td class="product-thumbnail">
+                                                    <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="<?php echo $values['productImg'];?>"></a>
+                                                </td>
+
+                                                <td class="product-name">
+                                                    <a href="single-product.php?productId=<?php echo $values["productCode"]; ?>"><?php echo $values["productName"]; ?></a> 
+                                                </td>
+
+                                            <td class="product-quantity">
+                                                <div class="quantity buttons_added">
+                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="" min="0" step="1">
+                                                </div>
+                                            </td>
+
+                                            <td class="product-price">
+                                                <span class="amount"><?php echo $values['productPrice']; ?></span> 
+                                            </td>
+
+                                            </tr>
+
+                                             <?php           }
+                                                    }
+                                            } while ($conn->more_results() && $conn->next_result());
+
+
+                                                       
+                                            }
+                                            $conn->close(); ?>
+</tbody>
+</table>
                             </div>
 
                         </div>                       
                     </div>                    
-                </div>
+                </div></div><
 
 
 
