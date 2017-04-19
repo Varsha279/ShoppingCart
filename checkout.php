@@ -56,6 +56,8 @@ if(isset($_POST['place_order'])){
 
             $db->close();
 
+            echo '<script>window.location="orderSucess.php"</script>';
+
 
 
 
@@ -194,7 +196,7 @@ $conn->close();
                                 <div class="clear"></div>
                             </form>
 
-                            <form enctype="multipart/form-data" action="checkout.php" class="checkout" method="post" name="checkout">
+                            <form enctype="multipart/form-data" action="checkout.php?total=<?php echo $_GET['total'];?>" class="checkout" method="post" id="checkout" name="checkout">
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">
@@ -217,13 +219,14 @@ $conn->close();
                                             <p id="billing_first_name_field" class="form-row form-row-first validate-required">
                                                 <label class="" for="billing_first_name">Name <abbr title="required" class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="" id="billing_first_name" name="billing_first_name" class="input-text ">
+                                                <input type="text" value="" placeholder="" id="billing_first_name" name="billing_first_name" class="input-text" data-pattern-error="Please use only letters for your city." pattern="[A-z ']*" required>
                                             </p>
+
 
                                             <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
                                                 <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="Street address" id="address" name="billing_address" class="input-text ">
+                                                <input type="text" value="" placeholder="Street address" id="address" name="billing_address" class="input-text " required>
                                             </p>
 
                                             <p id="billing_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
@@ -239,7 +242,7 @@ $conn->close();
                                             <p id="billing_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                                 <label class="" for="billing_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="Postcode / Zip" id="billing_postcode" name="billing_postal" class="input-text ">
+                                                <input type="text" value="" placeholder="Postcode / Zip" id="billing_postcode" name="billing_postal" class="input-text " required>
                                             </p>
 
                                             <div class="clear"></div>
@@ -247,7 +250,7 @@ $conn->close();
                                             <p id="billing_email_field" class="form-row form-row-first validate-required validate-email">
                                                 <label class="" for="billing_email">Email Address <abbr title="required" class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="" id="billing_email" name="billing_email" class="input-text ">
+                                                <input type="email" value="" placeholder="" id="billing_email" name="billing_email" class="input-text " required>
                                             </p>
 
                                             <p id="billing_phone_field" class="form-row form-row-last validate-required validate-phone">
@@ -299,8 +302,8 @@ $conn->close();
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>u<span>Stora</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <h2>Caliva<span>Store</span></h2>
+                        <p>we appreciate your bussiness with us.<br/>Thanks for visiting</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -351,14 +354,8 @@ $conn->close();
     </div>
     <div class="footer-bottom-area">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="copyright">
-                        <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
+            <div class="row">                
+                <div class="col-md-12">
                     <div class="footer-card-icon">
                         <i class="fa fa-cc-discover"></i>
                         <i class="fa fa-cc-mastercard"></i>
@@ -369,7 +366,6 @@ $conn->close();
             </div>
         </div>
     </div>
-   
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
     

@@ -1,5 +1,9 @@
 <?php
 require 'common.php';
+if (isset($_SESSION['shopping_cart'])) {
+    # code...
+    unset($_SESSION['shopping_cart']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,31 +28,10 @@ require 'common.php';
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    
   </head>
   <body>
-   
-    <div class="header-area">
-        <div class="container">
-            <div class="row">
-               
-                <div class="col-md-8">
-                    <div class="user-menu">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
-                            <li> <a href="cart.html">Cart - <span class="cart-amunt"></span> <i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                </div>  
-            </div>
-        </div>
-    </div> <!-- End site branding area -->
-    
-    <div class="mainmenu-area">
+  
+   <div class="mainmenu-area">
         <div class="container">
             <div class="row">
                 <div class="navbar-header">
@@ -62,9 +45,9 @@ require 'common.php';
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="shop.php">Shop page</a></li>
+                        <li><a href="shop.php">Shop page</a></li>
                         <li><a href="cart.php">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li class="active"><a href="checkout.php">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
@@ -73,7 +56,7 @@ require 'common.php';
             </div>
         </div>
     </div> <!-- End mainmenu area -->
-    
+
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -85,104 +68,18 @@ require 'common.php';
             </div>
         </div>
     </div>
-    
-    
-    <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                
-<?php
-
-
-    foreach ($xml->channel->item as $item) {
-    
-        $content = $item->children('content', 'https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1');
-        $html_string = $content->encoded;
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($html_string);
-        libxml_clear_errors();
-
-        $title = (string) $item->title;
-        $description = (string) $item->description;
-        $img =(string) $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
-        $productId = $dom->getElementsByTagName('a')->item(0)->getAttribute('data-product-products');
-        $name = implode(' ', array_slice(explode(' ', $title), 0, 4));
-
-        if(preg_match($pattern, $description,$matches)){
-            $price=(string) $matches[0];
-        }else{
-            $price= "Free";
-        }
-    ?>
-
-        
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-shop-product">
-                        <div class="product-upper">
-                            <img src="<?php echo $img; ?>" alt="">
-                        </div>
-                        <h2><a href="single-product.php?productId=<?php echo $productId ; ?>"><?php echo $name;?></a></h2>
-                        <div class="product-carousel-price">
-                            <ins><?php echo $price; ?></ins> <del>$999.00</del>
-                        </div>  
-
-
-                       <form method="post" action="shop.php?action=add" class="cart">
-                        <input type="hidden" value="<?php echo $price; ?>" name="hidden_price">
-                        <input type="text" value="<?php echo $productId; ?>" name="hidden_pId" >
-                        <input type="hidden" value="<?php echo $name; ?>" name="hidden_name" >
-                        <input type="hidden" value="<?php echo $img; ?>" name="hidden_img" >
-                        <input type="hidden" value="1" name="hidden_quantity" >
-                        <div class="product-option-shop">
-                        <button name="add_to_cart" class="add_to_cart_button" type="submit">Add to cart</button>
-                        </form>
-                        </div>                       
-                    </div>
-                </div>
-
-
-
-
-<?php
-
-    }
-
-?>
-
+     
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                    Thank you for shopping with us. <br/> A confirmation has been sent to your email <br/>
             </div>
             
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-pagination text-center">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                              </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                              <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>                        
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
 
-    <div class="footer-top-area">
+     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -252,20 +149,8 @@ require 'common.php';
             </div>
         </div>
     </div>
-   
-    <!-- Latest jQuery form server -->
+   <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready (function(){
-           window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 900);
- });
-
-    </script>
-
     
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

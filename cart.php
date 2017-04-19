@@ -110,6 +110,7 @@ $item_total = 0;
                 <div class="col-md-12">
                     <div class="product-content-right">
                         <div class="woocommerce">
+                        <?php if (isset($_SESSION['shopping_cart'])) {?>
                             <form method="post" action="#">
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
@@ -125,7 +126,7 @@ $item_total = 0;
                                     <tbody>
 
                                     <?php    
-                                    if (isset($_SESSION['shopping_cart'])) {
+                                    
                                         foreach ($_SESSION['shopping_cart'] as $keys=> $values){
                                     ?>
                                         <tr class="cart_item">
@@ -161,7 +162,7 @@ $item_total = 0;
                                                 <span class="amount">$<?php echo $total;?></span> 
                                             </td>
                                         </tr>
-                                        <?php } }else{ echo "Your Cart Is Empty. Please "."<a href='shop.php'>Continue Shopping</a><br/>";}
+                                        <?php } 
 
                                          ?>
                                         <tr>
@@ -175,39 +176,13 @@ $item_total = 0;
                                                 <a href="checkout.php?total=<?php echo $item_total?>">Place Order</a>
                                             </td>
                                         </tr>
-                            
+                            <?php }else{ echo "Your Cart Is Empty. Please "."<a href='shop.php'>Continue Shopping</a><br/>";}?>
                                     </tbody>
                                 </table>
                             
                             </form>
 
                             <div class="cart-collaterals">
-
-
-                            <div class="cross-sells">
-                                <h2>You may be interested in...</h2>
-                                <ul class="products">
-                                    <li class="product">
-                                        <a href="single-product.html">
-                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-2.jpg">
-                                            <h3>Ship Your Idea</h3>
-                                            <span class="price"><span class="amount">£20.00</span></span>
-                                        </a>
-
-                                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
-                                    </li>
-
-                                    <li class="product">
-                                        <a href="single-product.html">
-                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-4.jpg">
-                                            <h3>Ship Your Idea</h3>
-                                            <span class="price"><span class="amount">£20.00</span></span>
-                                        </a>
-
-                                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
-                                    </li>
-                                </ul>
-                            </div>
 
 
                             <div class="cart_totals ">
@@ -234,34 +209,6 @@ $item_total = 0;
                             </div>
 
 
-                            <form method="post" action="#" class="shipping_calculator">
-                                <h2><a class="shipping-calculator-button" data-toggle="collapse" href="#calcalute-shipping-wrap" aria-expanded="false" aria-controls="calcalute-shipping-wrap">Calculate Shipping</a></h2>
-
-                                <section id="calcalute-shipping-wrap" class="shipping-calculator-form collapse">
-
-                                <p class="form-row form-row-wide">
-                                <select rel="calc_shipping_state" class="country_to_state" id="calc_shipping_country" name="calc_shipping_country">
-                                    <option value="">Select a country…</option>
-                                    <option value="AU">Australia</option>
-                                    <option value="IN">India</option>
-                                    <option value="NZ">New Zealand</option>                                   
-                                    <option value="AE">United Arab Emirates</option>
-                                    <option selected="selected" value="US">United States (US)</option>
-                                    <option value="UK">United Kingdom (US)</option>
-                                </select>
-                                </p>
-
-                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state" name="calc_shipping_state" placeholder="State / county" value="" class="input-text"> </p>
-
-                                <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode" name="calc_shipping_postcode" placeholder="Postcode / Zip" value="" class="input-text"></p>
-
-
-                                <p><button class="button" value="1" name="calc_shipping" type="submit">Update Totals</button></p>
-
-                                </section>
-                            </form>
-
-
                             </div>
                         </div>                        
                     </div>                    
@@ -271,14 +218,14 @@ $item_total = 0;
     </div>
 
 
-    <div class="footer-top-area">
+     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>u<span>Stora</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <h2>Caliva<span>Store</span></h2>
+                        <p>we appreciate your bussiness with us.<br/>Thanks for visiting</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -292,11 +239,11 @@ $item_total = 0;
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">User Navigation </h2>
                         <ul>
-                            <li><a href="#">My account</a></li>
-                            <li><a href="#">Order history</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">Vendor contact</a></li>
-                            <li><a href="#">Front page</a></li>
+                            <li><a href="">My account</a></li>
+                            <li><a href="">Order history</a></li>
+                            <li><a href="">Wishlist</a></li>
+                            <li><a href="">Vendor contact</a></li>
+                            <li><a href="">Front page</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -305,11 +252,11 @@ $item_total = 0;
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Categories</h2>
                         <ul>
-                            <li><a href="#">Mobile Phone</a></li>
-                            <li><a href="#">Home accesseries</a></li>
-                            <li><a href="#">LED TV</a></li>
-                            <li><a href="#">Computer</a></li>
-                            <li><a href="#">Gadets</a></li>
+                            <li><a href="">Mobile Phone</a></li>
+                            <li><a href="">Home accesseries</a></li>
+                            <li><a href="">LED TV</a></li>
+                            <li><a href="">Computer</a></li>
+                            <li><a href="">Gadets</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -319,27 +266,18 @@ $item_total = 0;
                         <h2 class="footer-wid-title">Newsletter</h2>
                         <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
                         <div class="newsletter-form">
-                            <form action="#">
-                                <input type="email" placeholder="Type your email">
-                                <input type="submit" value="Subscribe">
-                            </form>
+                            <input type="email" placeholder="Type your email">
+                            <input type="submit" value="Subscribe">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End footer top area -->
-    
+    </div>
     <div class="footer-bottom-area">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="copyright">
-                        <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
+            <div class="row">                
+                <div class="col-md-12">
                     <div class="footer-card-icon">
                         <i class="fa fa-cc-discover"></i>
                         <i class="fa fa-cc-mastercard"></i>
@@ -349,9 +287,8 @@ $item_total = 0;
                 </div>
             </div>
         </div>
-    </div> <!-- End footer bottom area -->
-   
-    <!-- Latest jQuery form server -->
+    </div>
+   <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
     
     <!-- Bootstrap JS form CDN -->
