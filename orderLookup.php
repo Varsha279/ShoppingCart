@@ -120,8 +120,7 @@ $conn->close();*/
                                 
 
 <?php
-$url = parse_url(getenv(" mysql://b7e27d8cda5626:51e2266a@us-cdbr-iron-east-03.cleardb.net/heroku_fdebbe9614c7af3?reconnect=true
-"));
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $servername = "localhost";
 $username = "root";
