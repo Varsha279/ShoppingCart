@@ -121,10 +121,9 @@ $conn->close();*/
 
 <?php
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
 $dbname = substr($url["path"], 1);
 
 // Create connection
