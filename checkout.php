@@ -1,9 +1,12 @@
 <?php
 require 'common.php';
+$url = parse_url(getenv(" mysql://b7e27d8cda5626:51e2266a@us-cdbr-iron-east-03.cleardb.net/heroku_fdebbe9614c7af3?reconnect=true
+"));
+
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "shoppingcart";
+$dbname = substr($url["path"], 1);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
