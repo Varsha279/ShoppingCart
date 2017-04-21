@@ -113,8 +113,8 @@ $sql3 = "Select * from User";
  $result3 = $conn->query($sql3);
  foreach ($result3 as $value3) {
      # code...
-    echo $value3['userName'].<br/>;
-    echo $value3['userEmail'].<br/>;
+    echo $value3['userName'].'<br/>';
+    echo $value3['userEmail'];
  }
 
 
