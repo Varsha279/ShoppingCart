@@ -4,61 +4,111 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "75e326c221ee30ca0913cdfd42f64e2d",
+    "content-hash": "ac96151fc878dfaa0ca4fafcae134947",
     "packages": [
         {
-            "name": "sendgrid/smtpapi",
-            "version": "0.5.0",
+            "name": "sendgrid/php-http-client",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sendgrid/smtpapi-php.git",
-                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5"
+                "url": "https://github.com/sendgrid/php-http-client.git",
+                "reference": "f886cd3cf48bafd3c7b28b1ca5c2484f7916cff1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
+                "url": "https://api.github.com/repos/sendgrid/php-http-client/zipball/f886cd3cf48bafd3c7b28b1ca5c2484f7916cff1",
+                "reference": "f886cd3cf48bafd3c7b28b1ca5c2484f7916cff1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
-            },
-            "replace": {
-                "sendgrid/smtpapi-php": "*"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "~4.4",
+                "squizlabs/php_codesniffer": "~2.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Smtpapi": "lib/"
+                "psr-4": {
+                    "SendGrid\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Build SendGrid X-SMTPAPI headers in PHP.",
-            "homepage": "http://github.com/sendgrid/smtpapi-php",
+            "authors": [
+                {
+                    "name": "Matt Bernier",
+                    "email": "dx@sendgrid.com"
+                },
+                {
+                    "name": "Elmer Thomas",
+                    "email": "elmer@thinkingserious.com"
+                }
+            ],
+            "description": "HTTP REST client, simplified for PHP",
+            "homepage": "http://github.com/sendgrid/php-http-client",
             "keywords": [
-                "X-SMTP",
                 "api",
+                "fluent",
+                "http",
+                "rest",
+                "sendgrid"
+            ],
+            "time": "2017-03-02T05:51:19+00:00"
+        },
+        {
+            "name": "sendgrid/sendgrid",
+            "version": "5.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendgrid/sendgrid-php.git",
+                "reference": "bdcdb96a90200113e827699911cb21091a5dd01b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/bdcdb96a90200113e827699911cb21091a5dd01b",
+                "reference": "bdcdb96a90200113e827699911cb21091a5dd01b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "sendgrid/php-http-client": "~3.5"
+            },
+            "replace": {
+                "sendgrid/sendgrid-php": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/SendGrid.php",
+                    "lib/helpers/mail/Mail.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
+            "homepage": "http://github.com/sendgrid/sendgrid-php",
+            "keywords": [
                 "email",
                 "grid",
                 "send",
-                "sendgrid",
-                "smtp",
-                "smtpapi",
-                "xsmtp"
+                "sendgrid"
             ],
-            "time": "2015-04-14T02:37:45+00:00"
+            "time": "2017-04-18T16:27:23+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "dev-master",
+            "version": "v121",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
@@ -102,7 +152,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
