@@ -292,3 +292,4 @@ $response = $sg->client->user()->webhooks()->parse()->stats()->get(null, $query_
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

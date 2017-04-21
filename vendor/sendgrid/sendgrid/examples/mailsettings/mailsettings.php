@@ -218,3 +218,4 @@ $response = $sg->client->mail_settings()->template()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

@@ -64,7 +64,7 @@ We welcome direct contributions to the php-http-client code base. Thank you!
 
 ##### Prerequisites #####
 
-- PHP 5.6 or 7.0
+- PHP 5.2 through 5.6
 - [Composer](https://getcomposer.org/)
 
 ##### Initial setup: #####
@@ -122,9 +122,7 @@ All test files are in the [`/test/unit`](https://github.com/sendgrid/php-http-cl
 For the purposes of contributing to this repo, please update the [`ClientTest.php`](https://github.com/sendgrid/php-http-client/blob/master/test/unit/ClientTest.php) file with unit tests as you modify the code.
 
 ```bash
-composer install
-cd test/unit
-../../vendor/bin/phpunit . --bootstrap bootstrap.php --filter test*
+phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 <a name="style_guidelines_and_naming_conventions"></a>

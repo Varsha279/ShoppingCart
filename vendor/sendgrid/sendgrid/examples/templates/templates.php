@@ -128,3 +128,4 @@ $response = $sg->client->templates()->_($template_id)->versions()->_($version_id
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

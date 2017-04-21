@@ -152,3 +152,4 @@ $response = $sg->client->campaigns()->_($campaign_id)->schedules()->test()->post
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

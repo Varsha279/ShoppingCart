@@ -49,7 +49,7 @@ Add SendGrid to your `composer.json` file. If you are not using [Composer](http:
 ```json
 {
   "require": {
-    "sendgrid/sendgrid": "~5.4"
+    "sendgrid/sendgrid": "~5.0.9"
   }
 }
 ```
@@ -88,10 +88,10 @@ The following is the minimum needed code to send an email with the [/mail/send H
 
 ```php
 <?php
-// If you are using Composer (recommended)
+// If you are using Composer
 require 'vendor/autoload.php';
 
-// If you are not using Composer
+// If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $from = new SendGrid\Email(null, "test@example.com");
@@ -117,10 +117,10 @@ The following is the minimum needed code to send an email without the /mail/send
 
 ```php
 <?php
-// If you are using Composer (recommended)
+// If you are using Composer
 require 'vendor/autoload.php';
 
-// If you are not using Composer
+// If you are not using Composer (recommended)
 // require("path/to/sendgrid-php/sendgrid-php.php");
 
 $request_body = json_decode('{
@@ -245,5 +245,6 @@ sendgrid-php is guided and supported by the SendGrid [Developer Experience Team]
 
 sendgrid-php is maintained and funded by SendGrid, Inc. The names and logos for sendgrid-php are trademarks of SendGrid, Inc.
 
-![SendGrid Logo](https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
+![SendGrid Logo]
+(https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png)
 

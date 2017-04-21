@@ -109,3 +109,4 @@ $response = $sg->client->tracking_settings()->subscription()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

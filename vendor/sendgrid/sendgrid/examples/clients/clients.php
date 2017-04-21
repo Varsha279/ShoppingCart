@@ -26,3 +26,4 @@ $response = $sg->client->clients()->_($client_type)->stats()->get(null, $query_p
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

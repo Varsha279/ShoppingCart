@@ -14,3 +14,4 @@ $response = $sg->client->scopes()->get();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

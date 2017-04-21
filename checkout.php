@@ -56,8 +56,20 @@ if(isset($_POST['place_order'])){
 
 
             $db->close();
+            $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
+            $subject = "Hello World from the SendGrid PHP Library!";
+            $to = new SendGrid\Email(null, "ubhrani.varsha@gmail.com");
+            $content = new SendGrid\Content("text/plain", "Hello, Email!");
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-            echo '<script>window.location="orderSucess.php"</script>';
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+
+            $response = $sg->client->mail()->send()->post($mail);
+            echo $response->statusCode();
+            echo $response->headers();
+            echo $response->body();
+            //echo '<script>window.location="orderSucess.php"</script>';
 
 
 

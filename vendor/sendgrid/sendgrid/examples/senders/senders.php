@@ -97,3 +97,4 @@ $response = $sg->client->senders()->_($sender_id)->resend_verification()->post()
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

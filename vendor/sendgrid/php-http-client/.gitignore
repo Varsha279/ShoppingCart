@@ -2,5 +2,3 @@
 *.lock
 vendor/
 *.old
-.idea/
-*.phar

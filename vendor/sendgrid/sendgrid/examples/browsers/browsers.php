@@ -15,3 +15,4 @@ $response = $sg->client->browsers()->stats()->get(null, $query_params);
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

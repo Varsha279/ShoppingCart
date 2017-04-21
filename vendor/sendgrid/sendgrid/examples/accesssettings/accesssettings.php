@@ -82,3 +82,4 @@ $response = $sg->client->access_settings()->whitelist()->_($rule_id)->delete();
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
+

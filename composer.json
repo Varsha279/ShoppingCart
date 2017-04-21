@@ -9,6 +9,6 @@
       "heroku/heroku-buildpack-php": "*"
    },
    "require": {
-    "sendgrid/sendgrid": "~5.4"
+    "sendgrid/sendgrid": "~5.0.9"
   }
 }
