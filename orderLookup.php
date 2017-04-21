@@ -133,6 +133,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sql3 = "Select * from User";
+ $result3 = $conn->query($sql);
+ foreach ($result3 as $value3) {
+     # code...
+    echo $result3['userName'];
+    echo $result3['userEmail'];
+ }
+
+
 if(isset($_POST['show_details'])){ 
     $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
 
@@ -141,6 +150,7 @@ if(isset($_POST['show_details'])){
 
     while ($row = $result->fetch_assoc()) {
          $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
+
 } 
                                     if (!$conn->multi_query($sql1)) {
                                         echo "Sorry. No Order is found. Please try again with Correct orderID or Please Continue Shopping ";
