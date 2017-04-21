@@ -1,5 +1,7 @@
 <?php
 require 'common.php';
+require 'vendor/autoload.php';
+
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $servername = $url["host"];
 $username = $url["user"];
