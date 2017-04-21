@@ -109,21 +109,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql3 = "Select * from Product";
- $result3 = $conn->query($sql3);
- foreach ($result3 as $value3) {
-     # code...
-    echo $value3['productName'];
-    echo $value3['productCode'].'<br/>';
- }
-
 
 if(isset($_POST['show_details'])){ 
     $sql = "SELECT productCode,quantity from order_items WHERE orderId = '30'";
 
     $result = $conn->query($sql);
     $sql1 = "";
-    print_r($result);
     
         foreach ($result as $row) {
 
@@ -154,8 +145,6 @@ if(isset($_POST['show_details'])){
 <?php                                         
                                                 if ($res = $conn->store_result()) {
                                                     $result = $res->fetch_all(MYSQLI_ASSOC);
-                                                    //$res->free();
-                                                    print_r($result);
                                                 foreach ($result as $keys => $values) { 
                                                     ?>
 

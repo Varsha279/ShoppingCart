@@ -24,6 +24,8 @@ if(isset($_POST['place_order'])){
         $query = "INSERT INTO Order_main (userId) VALUES ('$uID')";
 
         if ($conn->query($query) === TRUE) {
+
+            $orderId = $conn->insert_id;
             $sql1 = "";
             $orderID=$conn->insert_id;
             foreach($_SESSION['shopping_cart'] as $keys => $values){
@@ -56,6 +58,13 @@ if(isset($_POST['place_order'])){
 
 
             $db->close();
+
+            $to = $_POST["billing_email"];
+            $subject = "Order Details from Caliva";
+            $msg = "Thanks for shopping with us"."<br/>".$orderId;
+            mail($to,$subject,$msg);
+
+
 
             echo '<script>window.location="orderSucess.php"</script>';
 
