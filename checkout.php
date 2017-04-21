@@ -1,5 +1,7 @@
 <?php
 require 'common.php';
+require 'vendor/autoload.php';
+
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $servername = $url["host"];
 $username = $url["user"];
@@ -59,17 +61,15 @@ if(isset($_POST['place_order'])){
 
             $db->close();
 
-            $email = trim(stripslashes( $_POST["billing_email"]));
-            $subject = "Order Details from Caliva";
-            $msg = "Thanks for shopping with us"."<br/>".$orderId;
-            $mail=mail($email,$subject,$msg);
+$sendgrid = new SendGrid("SENDGRID_APIKEY");
+$email    = new SendGrid\Email();
 
-if ($mail) {
-    echo '<script>window.location="orderSucess.php"</script>';
-}else{
-          echo "Something went wrong. Please try again."; 
+$email->addTo("test@sendgrid.com")
+      ->setFrom("ubhrani.varsha@gmail.com")
+      ->setSubject("Sending with SendGrid is Fun")
+      ->setHtml("and easy to do anywhere, even with PHP");
 
-}
+$sendgrid->send($email);
 
 
 
