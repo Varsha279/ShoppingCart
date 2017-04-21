@@ -8,8 +8,7 @@
    "require-dev": {
       "heroku/heroku-buildpack-php": "*"
    },
-   "minimum-stability" : "dev",
-    "require": {
-        "sendgrid/smtpapi": "~0.5"
-    }
+   "require": {
+    "sendgrid/sendgrid": "~5.4"
+  }
 }

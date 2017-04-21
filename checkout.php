@@ -61,15 +61,19 @@ if(isset($_POST['place_order'])){
 
             $db->close();
 
-$sendgrid = new SendGrid("SENDGRID_APIKEY");
-$email    = new SendGrid\Email();
+$from = new SendGrid\Email(null, "ubhrani.varsha@gmail.com");
+$subject = "Hello World from the SendGrid PHP Library!";
+$to = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
+$content = new SendGrid\Content("text/plain", "Hello, Email!");
+$mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-$email->addTo("varshaubhrani90@gmail.com")
-      ->setFrom("ubhrani.varsha@gmail.com")
-      ->setSubject("Sending with SendGrid is Fun")
-      ->setHtml("and easy to do anywhere, even with PHP");
+$apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
 
-$sendgrid->send($email);
+$response = $sg->client->mail()->send()->post($mail);
+echo $response->statusCode();
+echo $response->headers();
+echo $response->body();
 
 
 
