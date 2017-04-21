@@ -59,14 +59,21 @@ if(isset($_POST['place_order'])){
 
             $db->close();
 
-            $to = $_POST["billing_email"];
+            $email = trim(stripslashes( $_POST["billing_email"]));
             $subject = "Order Details from Caliva";
             $msg = "Thanks for shopping with us"."<br/>".$orderId;
-            mail($to,$subject,$msg);
+            $mail=mail($email,$subject,$msg);
+
+if ($mail) {
+    echo '<script>window.location="orderSucess.php"</script>';
+}else{
+          echo "Something went wrong. Please try again."; 
+
+}
 
 
 
-            echo '<script>window.location="orderSucess.php"</script>';
+           
 
 
 
