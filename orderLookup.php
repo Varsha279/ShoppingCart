@@ -1,27 +1,3 @@
-<?php
-
-
-/*if (!$conn->multi_query($sql1)) {
-    echo "Multi query failed: (" . $conn->errno . ") " . $conn->error;
-}
-
-do {
-    if ($res = $conn->store_result()) {
-        $result = $res->fetch_all(MYSQLI_ASSOC);
-        //$res->free();
-            foreach ($result as $key => $value) {
-                echo $value['productCode'];
-                # code...
-            }
-        }
-} while ($conn->more_results() && $conn->next_result());
-
-
-           
-}
-$conn->close();*/
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
