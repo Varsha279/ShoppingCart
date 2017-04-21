@@ -6,9 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit7942d451a69be9d766b4e462690bcfa8
 {
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Smtpapi' => 
+            array (
+                0 => __DIR__ . '/..' . '/sendgrid/smtpapi/lib',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixesPsr0 = ComposerStaticInit7942d451a69be9d766b4e462690bcfa8::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
