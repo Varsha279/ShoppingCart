@@ -138,7 +138,7 @@ $sql3 = "Select * from User";
  foreach ($result3 as $value3) {
      # code...
     echo $value3['userName'].<br/>;
-    echo $value3['userEmail'];
+    echo $value3['userEmail'].<br/>;
  }
 
 
