@@ -153,6 +153,7 @@ if(isset($_POST['show_details'])){
                                                 if ($res = $conn->store_result()) {
                                                     $result = $res->fetch_all(MYSQLI_ASSOC);
                                                     //$res->free();
+                                                    print_r($result);
                                                 foreach ($result as $keys => $values) { 
                                                     ?>
 
