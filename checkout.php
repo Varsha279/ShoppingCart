@@ -64,7 +64,7 @@ if(isset($_POST['place_order'])){
 $sendgrid = new SendGrid("SENDGRID_APIKEY");
 $email    = new SendGrid\Email();
 
-$email->addTo("test@sendgrid.com")
+$email->addTo("varshaubhrani90@gmail.com")
       ->setFrom("ubhrani.varsha@gmail.com")
       ->setSubject("Sending with SendGrid is Fun")
       ->setHtml("and easy to do anywhere, even with PHP");
