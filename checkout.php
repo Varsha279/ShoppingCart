@@ -1,7 +1,5 @@
 <?php
 require 'common.php';
-require 'vendor/autoload.php';
-
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $servername = $url["host"];
 $username = $url["user"];
@@ -26,8 +24,6 @@ if(isset($_POST['place_order'])){
         $query = "INSERT INTO Order_main (userId) VALUES ('$uID')";
 
         if ($conn->query($query) === TRUE) {
-
-            $orderId = $conn->insert_id;
             $sql1 = "";
             $orderID=$conn->insert_id;
             foreach($_SESSION['shopping_cart'] as $keys => $values){
@@ -60,6 +56,14 @@ if(isset($_POST['place_order'])){
 
 
             $db->close();
+
+            echo '<script>window.location="orderSucess.php"</script>';
+
+
+
+
+
+
             } else {echo "Error: ". $conn->error;
             }
         } else {echo "Error: " . $query . "<br>" . $conn->error;}
