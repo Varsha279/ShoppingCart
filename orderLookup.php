@@ -119,7 +119,7 @@ $sql3 = "Select * from Product";
 
 
 if(isset($_POST['show_details'])){ 
-    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
+    $sql = "SELECT productCode,quantity from order_items WHERE orderId = '30'";
 
     $result = $conn->query($sql);
     $sql1 = "";
