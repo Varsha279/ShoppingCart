@@ -137,7 +137,7 @@ $sql3 = "Select * from User";
  $result3 = $conn->query($sql3);
  foreach ($result3 as $value3) {
      # code...
-    echo $value3['userName'];
+    echo $value3['userName'].<br/>;
     echo $value3['userEmail'];
  }
 
@@ -149,7 +149,7 @@ if(isset($_POST['show_details'])){
     $sql1 = "";
 
     while ($row = $result->fetch_assoc()) {
-         $sql1 .= "SELECT * FROM Product WHERE productCode='".$row['productCode']."'; ";
+         $sql1 .= "SELECT DISTINCT productName,productPrice,productImg FROM Product WHERE productCode='".$row['productCode']."'; ";
 
 } 
                                     if (!$conn->multi_query($sql1)) {
