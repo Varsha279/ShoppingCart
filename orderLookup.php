@@ -123,6 +123,7 @@ if(isset($_POST['show_details'])){
 
     $result = $conn->query($sql);
     $sql1 = "";
+    print_r($result);
 
     while ($row = $result->fetch_assoc()) {
          $sql1 .= "SELECT DISTINCT productName,productPrice,productImg FROM Product WHERE productCode='".$row['productCode']."'; ";
