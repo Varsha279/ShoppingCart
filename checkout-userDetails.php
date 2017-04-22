@@ -3,9 +3,10 @@ require 'common.php';
 require 'config.php';
  $token  = $_POST['stripeToken'];
  $total=$_GET['total']*100;
+ $email=$_POST['billing_email'];
 
   $customer = \Stripe\Customer::create(array(
-      'email' => 'ubhrani.varsha@gmail.com',
+      'email' => $email,
       'source'  => $token
   ));
 
