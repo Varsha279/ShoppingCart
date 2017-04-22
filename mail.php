@@ -9,7 +9,7 @@ $to = new SendGrid\Email(null, "ubhrani.varsha@gmail.com");
 $content = new SendGrid\Content("text/plain", "Hello, Email!");
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-$apiKey = getenv('SENDGRID_API_KEY');
+$apiKey = 'SENDGRID_API_KEY';
 $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
