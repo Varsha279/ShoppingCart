@@ -1,5 +1,7 @@
 <?php
 require 'common.php';
+require 'vendor/autoload.php';
+
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $servername = $url["host"];
 $username = $url["user"];
@@ -19,7 +21,7 @@ if ($conn->connect_error) {
 } 
 
 if(isset($_POST['place_order'])){
-    
+     
 
     $sql = "INSERT INTO User (userName, userEmail, userPhone,userAddress,userPassword)
             VALUES ('".$_POST["billing_first_name"]."','".$_POST["billing_email"]."','".$_POST["billing_phone"]."','".$_POST["billing_address"]."','".$_POST["account_password"]."')";
@@ -31,6 +33,23 @@ if(isset($_POST['place_order'])){
         if ($conn->query($query) === TRUE) {
             $sql1 = "";
             $orderID=$conn->insert_id;
+            $msg="Thanks for shopping. Your Order Details are #RXTHYX".$orderID;
+            $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
+            $subject = "Order Details from Caliva";
+            $to = new SendGrid\Email(null, $_POST['billing_email']);
+            $content = new SendGrid\Content("text/plain", $msg);
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+
+            $response = $sg->client->mail()->send()->post($mail);
+            echo $response->statusCode();
+            echo $response->headers();
+            echo $response->body();  
+
+
+
             foreach($_SESSION['shopping_cart'] as $keys => $values){
                 $sql1 .= "INSERT INTO Order_items (orderId, productCode, quantity) VALUES ('".$orderID."', '".$values['item_id']."', '".$values['item_quantity']."');";
             }
