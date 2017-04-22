@@ -1,8 +1,5 @@
 <?php
 require 'common.php';
-require 'vendor/autoload.php';
-
-
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $servername = $url["host"];
 $username = $url["user"];
@@ -22,19 +19,7 @@ if ($conn->connect_error) {
 } 
 
 if(isset($_POST['place_order'])){
- $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
-            $subject = "Hello World from the SendGrid PHP Library!";
-            $to = new SendGrid\Email(null, "ubhrani.varsha@gmail.com");
-            $content = new SendGrid\Content("text/plain", "Hello, Email!");
-            $mail = new SendGrid\Mail($from, $subject, $to, $content);
-
-            $apiKey = getenv('SENDGRID_API_KEY');
-            $sg = new \SendGrid($apiKey);
-
-            $response = $sg->client->mail()->send()->post($mail);
-            echo $response->statusCode();
-            echo $response->headers();
-            echo $response->body();  
+    
 
     $sql = "INSERT INTO User (userName, userEmail, userPhone,userAddress,userPassword)
             VALUES ('".$_POST["billing_first_name"]."','".$_POST["billing_email"]."','".$_POST["billing_phone"]."','".$_POST["billing_address"]."','".$_POST["account_password"]."')";
