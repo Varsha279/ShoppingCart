@@ -2,16 +2,17 @@
   "require": {
     "ext-mysql": "*"
   },
-   "require": {
+
+  "require": {
       "ext-gettext": "*"
-    },
-   "require-dev": {
-      "heroku/heroku-buildpack-php": "*"
-   }, 
+  },
+  "require": {
+    "sendgrid/sendgrid": "~5.0.9"
+  }, 
   "require": {
     "stripe/stripe-php": "4.*"
   },
-   "require": {
-    "sendgrid/sendgrid": "~5.0.9"
-  }
+  "require-dev": {
+      "heroku/heroku-buildpack-php": "*"
+   }
 }
