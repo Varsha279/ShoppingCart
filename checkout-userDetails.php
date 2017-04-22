@@ -10,6 +10,7 @@ require 'config.php';
 
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
+      'amount'   => $_GET['total']*100,
       'currency' => 'usd'
   ));
 
@@ -60,7 +61,7 @@ require 'config.php';
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <form enctype="multipart/form-data" action="orderSucess.php" class="checkout" method="post" id="checkout" name="checkout">
-                                            <h3>Your Card Details are Verified.<br/>Please Fill out this Form to complete your Order</h3>
+                                            <h3>Your Details are Verified.<br/>Please Fill out this Form to complete your Order</h3>
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">
