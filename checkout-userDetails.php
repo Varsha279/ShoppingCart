@@ -4,17 +4,17 @@ require 'config.php';
  $token  = $_POST['stripeToken'];
 
   $customer = \Stripe\Customer::create(array(
-      'email' => $_POST['stripeEmail'],
+      'email' => 'ubhrani.varsha@gmail.com',
       'source'  => $token
   ));
 
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
-      'amount'   => $_GET['total'],
+      'amount'   => 5000,
       'currency' => 'usd'
   ));
 
-  //echo 'Card Details Verified !!';
+  echo '<h3>Card Details Verified !!</h3>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@ require 'config.php';
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <form enctype="multipart/form-data" action="orderSucess.php" class="checkout" method="post" id="checkout" name="checkout">
-                                            <h3>Your Card Details are verified !! <br/>Please Fill out this Form to complete your Order</h3>
+                                            <h3>Please Fill out this Form to complete your Order</h3>
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">
