@@ -1,9 +1,105 @@
 <?php
 require 'common.php';
+require 'vendor/autoload.php';
+require_once('config.php');
+
+
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$servername = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$dbname = substr($url["path"], 1);
+
+/*$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'shoppingcart';*/
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+  
+
+    $sql = "INSERT INTO User (userName, userEmail, userPhone,userAddress,userPassword)
+            VALUES ('".$_POST["billing_first_name"]."','".$_POST["billing_email"]."','".$_POST["billing_phone"]."','".$_POST["billing_address"]."','".$_POST["account_password"]."')";
+    
+    if ($conn->query($sql) === TRUE) {
+        $uID = $conn->insert_id;
+        $query = "INSERT INTO Order_main (userId) VALUES ('$uID')";
+
+        if ($conn->query($query) === TRUE) {
+            $sql1 = "";
+            $orderID=$conn->insert_id;
+            foreach($_SESSION['shopping_cart'] as $keys => $values){
+                $sql1 .= "INSERT INTO Order_items (orderId, productCode, quantity) VALUES ('".$orderID."', '".$values['item_id']."', '".$values['item_quantity']."');";
+            }
+           // insert order items into database
+            $insertOrderMain = $conn->multi_query($sql1);
+
+           
+            
+            if ($insertOrderMain) {
+
+
+
+                  $db = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($db->connect_error) {
+                        die("Connection failed: " . $db->connect_error);
+                    }
+
+                    $sql2="";
+
+            foreach($_SESSION['shopping_cart'] as $keys1 => $values1){
+                $price=(float)substr($values1['item_price'], 1);
+                 $sql2 .= "INSERT INTO Product (productCode, productName,productPrice,productImg ) VALUES ('".$values1['item_id']."','".$values1['item_name']."','$price', '".$values1['item_img']."');";
+
+            }
+
+            $insertOrderItems = $db->multi_query($sql2);                       
+            $msg="Your Order Number is #RxFsd".$orderID;
+
+            $db->close();
+            $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
+            $subject = "Order Details From Caliva";
+            $to = new SendGrid\Email(null, $_POST["billing_email"]);
+            $content = new SendGrid\Content("text/plain", $msg);
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+
+            $response = $sg->client->mail()->send()->post($mail);
+
+           
+
+
 if (isset($_SESSION['shopping_cart'])) {
     # code...
     unset($_SESSION['shopping_cart']);
 }
+            //echo '<script>window.location="orderSucess.php"</script>';
+
+
+
+
+
+
+            } else {echo "Error: ". $conn->error;
+            }
+        } else {echo "Error: " . $query . "<br>" . $conn->error;}
+
+    } else {
+    echo "Error: " . $query . "<br>" . $conn->error;
+}
+
+
+$conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

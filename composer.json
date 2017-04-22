@@ -10,5 +10,8 @@
    },
    "require": {
     "sendgrid/sendgrid": "~5.0.9"
+  }, 
+  "require": {
+    "stripe/stripe-php": "4.*"
   }
 }

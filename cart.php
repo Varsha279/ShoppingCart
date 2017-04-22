@@ -1,7 +1,5 @@
 <?php
 require 'common.php';
-require_once("dbcontroller.php");
-$db_handle = new DBController();
 $item_total = 0;
     if(isset($_GET['action'])){
         if($_GET['action']=='delete'){
