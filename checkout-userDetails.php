@@ -2,15 +2,16 @@
 require 'common.php';
 require 'config.php';
  $token  = $_POST['stripeToken'];
-
+ $total=$_GET['total']*100;
+ $email=$_POST['billing_email'];
   $customer = \Stripe\Customer::create(array(
-      'email' => $_POST['billing_email'],
+      'email' => $email,
       'source'  => $token
   ));
 
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
-      'amount'   => $_GET['total']*100,
+      'amount'   => $total,
       'currency' => 'usd'
   ));
 
