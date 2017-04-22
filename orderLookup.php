@@ -145,7 +145,7 @@ if(isset($_POST['show_details'])){
 <?php                                         
                                                 if ($res = $conn->store_result()) {
                                                     $result = $res->fetch_all(MYSQLI_ASSOC);
-                                                foreach ($result as $keys => $values) { 
+                                                 foreach ($result as $keys => $values) { 
                                                     ?>
 
                                                         

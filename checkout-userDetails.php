@@ -4,17 +4,15 @@ require 'config.php';
  $token  = $_POST['stripeToken'];
 
   $customer = \Stripe\Customer::create(array(
-      'email' => 'ubhrani.varsha@gmail.com',
+      'email' => $_POST['billing_email'],
       'source'  => $token
   ));
 
   $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
-      'amount'   => 5000,
       'currency' => 'usd'
   ));
 
-  echo '<h3>Card Details Verified !!</h3>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +39,18 @@ require 'config.php';
     <link rel="stylesheet" href="css/responsive.css">
   </head>
   <body>
+
+  <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Caliva Store</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
@@ -50,7 +60,7 @@ require 'config.php';
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <form enctype="multipart/form-data" action="orderSucess.php" class="checkout" method="post" id="checkout" name="checkout">
-                                            <h3>Please Fill out this Form to complete your Order</h3>
+                                            <h3>Your Card Details are Verified.<br/>Please Fill out this Form to complete your Order</h3>
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">

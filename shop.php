@@ -94,7 +94,7 @@ require 'common.php';
     ?>
 
         
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-8">
                     <div class="single-shop-product">
                         <div class="product-upper">
                             <img src="<?php echo $img; ?>" alt="">
