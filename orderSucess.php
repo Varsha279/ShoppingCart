@@ -64,7 +64,7 @@ if ($conn->connect_error) {
             //$msg=.$orderID;
 
             $db->close();
-     /*       $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
+            $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
             $subject = "Order Details From Caliva";
             $to = new SendGrid\Email(null, $_POST["billing_email"]);
             $content = new SendGrid\Content("text/plain", "Your Order Number is #RxFsd");
@@ -73,8 +73,10 @@ if ($conn->connect_error) {
             $apiKey = getenv('SENDGRID_API_KEY');
             $sg = new \SendGrid($apiKey);
 
-            $response = $sg->client->mail()->send()->post($mail);*/
-
+            $response = $sg->client->mail()->send()->post($mail);
+            echo $response->statusCode();
+echo $response->headers();
+echo $response->body();
            
 
 
