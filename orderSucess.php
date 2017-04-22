@@ -61,13 +61,13 @@ if ($conn->connect_error) {
             }
 
             $insertOrderItems = $db->multi_query($sql2);                       
-            $msg="Your Order Number is #RxFsd".$orderID;
+            //$msg=.$orderID;
 
             $db->close();
             $from = new SendGrid\Email(null, "varshaubhrani90@gmail.com");
             $subject = "Order Details From Caliva";
             $to = new SendGrid\Email(null, $_POST["billing_email"]);
-            $content = new SendGrid\Content("text/plain", $msg);
+            $content = new SendGrid\Content("text/plain", "Your Order Number is #RxFsd");
             $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
             $apiKey = getenv('SENDGRID_API_KEY');
