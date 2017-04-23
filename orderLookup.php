@@ -114,7 +114,7 @@ if(isset($_POST['show_details'])){
 
     $orderID=substr($_POST['orderId'], 7);
     echo $orderId;
-    $sql = "SELECT productCode,quantity from order_items WHERE orderId = '30'";
+    $sql = "SELECT productCode,quantity from order_items WHERE orderId = (Select orderId from User INNER JOIN Order_main ON User.userId=Order_main.userId and userName='".$_POST["first_name"]."' and userEmail='".$_POST["email"]."')";
 
     $result = $conn->query($sql);
     $sql1 = "";
