@@ -164,7 +164,7 @@ if(isset($_POST['show_details'])){
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="text" size="4" class="input-text qty text" title="Qty" value="<?php echo values['quantity'] ?>" min="0" step="1">
+                                                    <input type="text" size="4" class="input-text qty text" title="Qty" value="<?php echo $values['quantity'] ?>" min="0" step="1">
                                                 </div>
                                             </td>
 
