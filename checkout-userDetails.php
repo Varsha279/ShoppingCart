@@ -63,7 +63,7 @@ require 'config.php';
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <form enctype="multipart/form-data" action="orderSucess.php" class="checkout" method="post" id="checkout" name="checkout">
-                                            <h3>Your Details are Verified.<br/>Please Fill out this Form to complete your Order</h3>
+                                            <h4>Your Card Details are Verified.<br/>Please Fill out this Form to complete your Order</h4>
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">

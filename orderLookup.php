@@ -111,6 +111,9 @@ if ($conn->connect_error) {
 
 
 if(isset($_POST['show_details'])){ 
+
+    $orderID=substr($_POST['orderId'], 7);
+    echo $orderId;
     $sql = "SELECT productCode,quantity from order_items WHERE orderId = '30'";
 
     $result = $conn->query($sql);
