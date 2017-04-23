@@ -162,11 +162,11 @@ if(isset($_POST['show_details'])){
                                                     <label><?php echo $values["productName"]; ?></label>
                                                 </td>
 
-                                            <td class="product-quantity">
+                                            <!-- <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input type="text" size="4" class="input-text qty text" title="Qty" value="<?php echo $values['quantity'] ?>" min="0" step="1">
                                                 </div>
-                                            </td>
+                                            </td> -->
 
                                             <td class="product-price">
                                                 <span class="amount"><?php echo $values['productPrice']; ?></span> 
