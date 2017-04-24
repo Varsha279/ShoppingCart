@@ -137,7 +137,6 @@ if(isset($_POST['show_details'])){
                                         <tr>
                                             <th class="product-thumbnail">&nbsp;</th>
                                             <th class="product-name">Product</th>
-                                            <th class="product-quantity">Quantity</th>
                                             <th class="product-price">Price</th>
                                         </tr>
                                     </thead>
