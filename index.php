@@ -31,6 +31,9 @@
   </head>
   <body>
    
+    <div class="header-area">
+        <div class="container">
+            <div class="row">
      <div class="mainmenu-area">
         <div class="container">
             <div class="row">
@@ -53,6 +56,9 @@
             </div>
         </div>
     </div> <!-- End mainmenu area -->
+    </div>
+    </div>
+    </div>
     
     <div class="product-big-title-area">
         <div class="container">
